@@ -6,7 +6,7 @@ WITH transaction_summary AS (
     SELECT 
         sa.owner_id,
         COUNT(*) AS total_transactions,
-        SUM(sa.confirmed_amount) / 100 AS total_transaction_value_naira  -- Convert from kobo to Naira
+        SUM(sa.confirmed_amount) / 100 AS total_transaction_value_naira  -- Converts from kobo to Naira
     FROM savings_savingsaccount sa
     WHERE sa.confirmed_amount > 0
     GROUP BY sa.owner_id
@@ -14,7 +14,7 @@ WITH transaction_summary AS (
 user_tenure AS (
     SELECT 
         uc.id AS customer_id,
-        CONCAT_WS(' ', uc.first_name, uc.last_name) AS name,  -- adjust if names are stored differently
+        CONCAT_WS(' ', uc.first_name, uc.last_name) AS name, 
         TIMESTAMPDIFF(MONTH, uc.date_joined, CURDATE()) AS tenure_months
     FROM users_customuser uc
 ),
